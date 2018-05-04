@@ -7,47 +7,40 @@
 #define F_CPU 16000000UL
 #include <avr/io.h>
 #include <util/delay.h>
+void aaa(int angle);
 
-
-
-void aaa()
+int main()
 {
+	DDRA = 0xff;
+	PORTA = 0xff;
 	while(1)
 	{
+		aaa(0);
+		aaa(45);
+		aaa(90);
+		break;
+		
+	}	
+}
+
+void aaa(int angle)
+{
+	int temp = 0;
+	temp = (11.1111*angle)+500;
+	
 		for(int i = 0; i <= 100; i++)//0도
 		{
-			PORTA |= (1<<PA0);
-			_delay_us(500);
+			for(int j = 0; j <=temp; j++)
+			{
+				PORTA |= (1<<PA0);
+				_delay_us(1);
+			}
+			
 			PORTA &= ~(1<<PA0);
-			_delay_us(19500);
+			_delay_us(20);
 		}
-	}
+	
 }
-void bbb()
-{
-	while(1)
-	{	
-		for(int i = 0; i <= 100; i++)//90도
-		{
-			PORTA |= (1<<PA0);
-			_delay_us(1500);
-			PORTA &= ~(1<<PA0);
-			_delay_us(18500);
-		}
-	}
-}
-void ccc()
-{
-	while(1)
-	{
-		for(int i = 0; i <= 100; i++)//180도
-		{
-			PORTA |= (1<<PA0);
-			_delay_us(2500);
-			PORTA &= ~(1<<PA0);
-			_delay_us(17500);
-		}
-	}
-}
+
 
 
